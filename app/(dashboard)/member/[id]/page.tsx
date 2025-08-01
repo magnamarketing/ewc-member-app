@@ -6,58 +6,75 @@ import { Button } from "@/components/ui/button"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Label } from "@/components/ui/label"
-import { Pencil, Mail, HelpCircle, Car, CreditCard, Scan, Wifi, CheckCircle2, BookOpen, Smile, Gem } from "lucide-react"
+import { Pencil, Mail, Car, CreditCard, Scan, CheckCircle2, BookOpen, Smile, Gem } from "lucide-react"
 import { cn } from "@/lib/utils"
 
-const plans = [
+const membershipPlans = [
   {
     id: "basic",
     icon: <BookOpen className="w-5 h-5 text-purple-600" />,
-    name: "Basic plan (Default)",
-    price: "$10",
-    description: "Includes up to 10 users, 20GB individual data and access to all features.",
+    name: "Basic Wash",
+    brand: "Moo Moo Express",
+    description: "Standard car wash with basic cleaning products",
+    price: "$9.99",
   },
   {
-    id: "business",
+    id: "premium",
     icon: <Smile className="w-5 h-5 text-purple-600" />,
-    name: "Business plan",
-    price: "$20",
-    description: "Includes up to 20 users, 40GB individual data and access to all features.",
+    name: "Premium Wash",
+    brand: "Moo Moo Express",
+    description: "Premium car wash with premium products and extra services",
+    price: "$29.99",
   },
   {
-    id: "secret",
+    id: "unlimited",
     icon: <Gem className="w-5 h-5 text-purple-600" />,
-    name: "Secret plan",
-    price: "$80",
-    description: "Unlimited users, unlimited individual data and access to all features.",
+    name: "Unlimited Premium",
+    brand: "Moo Moo Express",
+    description: "Unlimited premium car washes with all premium products",
+    price: "$79.99",
   },
 ]
 
 const memberData = {
+  // Customer Information
+  customerGuid: "550e8400-e29b-41d4-a716-446655440001",
   firstName: "Jordan",
   lastName: "Mercer",
   email: "jordan.mercer@sampledomain.com",
-  phone: "+1 (416) 555-2910",
-  phoneRegion: "nj",
-  vehicleBrand: "Toyota - 2024 Corolla",
-  licensePlate: "ZXQ-8493",
-  location: "downtown",
-  rfid: "9876543",
-  plan: "basic",
-  paymentMethod: "**** **** **** 1234",
-  expDate: "**/**",
-  cvc: "***",
+  phone: "(416) 555-2910",
+  barcode: "123456789012",
+  
+  // Vehicle Information (optional)
+  vehicleMake: "Toyota",
+  vehicleModel: "2024 Corolla",
+  vehiclePlate: "ZXQ-8493",
+  
+  // Membership Information
+  membershipName: "Premium Wash",
+  membershipBrand: "Moo Moo Express",
+  membershipDescription: "Unlimited premium car washes with premium products",
+  membershipPrice: "$29.99",
+  
+  // Payment Information
+  cardHolderName: "Jordan Mercer",
+  cardNumber: "**** **** **** 1234",
+  expiryDate: "12/25",
+  cvv: "***",
+  zipCode: "12345",
 }
 
 export default function CustomerDetailPage({ params }: { params: { id: string } }) {
-  const [selectedPlan, setSelectedPlan] = useState(memberData.plan)
+  const [selectedMembership, setSelectedMembership] = useState("premium")
 
   return (
     <div className="w-full">
       <div className="bg-white p-6 rounded-2xl shadow-sm flex justify-between items-center mb-8">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Jordan Mercer</h1>
-          <p className="text-gray-500 mt-1">Update Jordan's details</p>
+          <h1 className="text-3xl font-bold text-gray-900">{`${memberData.firstName} ${memberData.lastName}`}</h1>
+          <p className="text-gray-500 mt-1 font-mono text-sm">
+            {memberData.customerGuid} | {memberData.barcode}
+          </p>
         </div>
         <Button variant="ghost" size="icon" className="bg-purple-100 hover:bg-purple-200 rounded-full">
           <Pencil className="w-6 h-6 text-purple-600" />
@@ -66,9 +83,9 @@ export default function CustomerDetailPage({ params }: { params: { id: string } 
 
       <div className="bg-white p-8 rounded-2xl shadow-sm">
         <form className="space-y-8">
-          {/* Personal Info */}
+          {/* Customer Information */}
           <div className="space-y-4">
-            <h2 className="text-lg font-semibold">Personal Info</h2>
+            <h2 className="text-lg font-semibold">Customer Information</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <Label htmlFor="firstName">First Name</Label>
@@ -84,123 +101,161 @@ export default function CustomerDetailPage({ params }: { params: { id: string } 
                 <Input id="email" type="email" defaultValue={memberData.email} className="pl-10" />
               </div>
               <div>
-                <Label htmlFor="phone">Phone number</Label>
+                <Label htmlFor="phone">Phone Number</Label>
+                <Input id="phone" type="tel" defaultValue={memberData.phone} />
+              </div>
+              <div className="md:col-span-2">
+                <Label htmlFor="barcode">Barcode</Label>
                 <div className="flex items-center gap-2">
-                  <div className="flex items-center justify-center w-[80px] h-10 px-3 text-sm border border-input bg-background rounded-md">
-                    +1
+                  <div className="relative flex-grow">
+                    <Scan className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                    <Input id="barcode" defaultValue={memberData.barcode} className="pl-10 font-mono" />
                   </div>
-                  <Input id="phone" type="tel" defaultValue={memberData.phone} />
-                  <HelpCircle className="h-5 w-5 text-gray-400" />
+                  <Button 
+                    className="bg-purple-600 hover:bg-purple-700 text-white transition-all duration-200 hover:scale-105 active:scale-95"
+                    title="Scan barcode with camera"
+                  >
+                    <Scan className="mr-2 h-4 w-4" />
+                    Scan
+                  </Button>
                 </div>
+                <p className="text-xs text-gray-500 mt-1">Click to scan barcode automatically</p>
               </div>
             </div>
           </div>
 
-          {/* Vehicle Info */}
+          {/* Vehicle Information (optional) */}
           <div className="space-y-4">
-            <h2 className="text-lg font-semibold">Vehicle Info</h2>
+            <h2 className="text-lg font-semibold">Vehicle (optional)</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="md:col-span-1">
-                <Label htmlFor="brand">Brand</Label>
-                <Input id="brand" defaultValue={memberData.vehicleBrand} />
-              </div>
-              <div className="md:col-span-1">
-                <Label htmlFor="licensePlate">License Plate</Label>
-                <div className="relative">
-                  <Car className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
-                  <Input id="licensePlate" defaultValue={memberData.licensePlate} className="pl-10" />
-                </div>
-              </div>
-              <div className="md:col-span-1">
-                <Label htmlFor="location">Location</Label>
-                <Select defaultValue={memberData.location}>
+              <div>
+                <Label htmlFor="vehicleMake">Make</Label>
+                <Select defaultValue={memberData.vehicleMake}>
                   <SelectTrigger>
-                    <SelectValue />
+                    <SelectValue placeholder="Select car make" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="downtown">Downtown Branch</SelectItem>
-                    <SelectItem value="uptown">Uptown Branch</SelectItem>
+                    <SelectItem value="Toyota">Toyota</SelectItem>
+                    <SelectItem value="Honda">Honda</SelectItem>
+                    <SelectItem value="Ford">Ford</SelectItem>
+                    <SelectItem value="Chevrolet">Chevrolet</SelectItem>
+                    <SelectItem value="Nissan">Nissan</SelectItem>
+                    <SelectItem value="BMW">BMW</SelectItem>
+                    <SelectItem value="Mercedes-Benz">Mercedes-Benz</SelectItem>
+                    <SelectItem value="Audi">Audi</SelectItem>
+                    <SelectItem value="Volkswagen">Volkswagen</SelectItem>
+                    <SelectItem value="Hyundai">Hyundai</SelectItem>
+                    <SelectItem value="Kia">Kia</SelectItem>
+                    <SelectItem value="Mazda">Mazda</SelectItem>
+                    <SelectItem value="Subaru">Subaru</SelectItem>
+                    <SelectItem value="Lexus">Lexus</SelectItem>
+                    <SelectItem value="Acura">Acura</SelectItem>
+                    <SelectItem value="Infiniti">Infiniti</SelectItem>
+                    <SelectItem value="Volvo">Volvo</SelectItem>
+                    <SelectItem value="Porsche">Porsche</SelectItem>
+                    <SelectItem value="Jaguar">Jaguar</SelectItem>
+                    <SelectItem value="Land Rover">Land Rover</SelectItem>
+                    <SelectItem value="Jeep">Jeep</SelectItem>
+                    <SelectItem value="Dodge">Dodge</SelectItem>
+                    <SelectItem value="Chrysler">Chrysler</SelectItem>
+                    <SelectItem value="Buick">Buick</SelectItem>
+                    <SelectItem value="Cadillac">Cadillac</SelectItem>
+                    <SelectItem value="Lincoln">Lincoln</SelectItem>
+                    <SelectItem value="Tesla">Tesla</SelectItem>
+                    <SelectItem value="Other">Other</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
-              <div className="md:col-span-2">
-                <Label htmlFor="rfid">RFID Number</Label>
-                <div className="relative">
-                  <Wifi className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
-                  <Input id="rfid" defaultValue={memberData.rfid} className="pl-10" />
-                </div>
+              <div>
+                <Label htmlFor="vehicleModel">Model</Label>
+                <Input id="vehicleModel" defaultValue={memberData.vehicleModel} />
               </div>
-              <div className="md:col-span-1 self-end">
-                <Button className="w-full bg-purple-600 hover:bg-purple-700 text-white">
-                  <Scan className="mr-2 h-4 w-4" />
-                  Update RFID
-                </Button>
+              <div>
+                <Label htmlFor="vehiclePlate">Vehicle Plate</Label>
+                <div className="relative">
+                  <Car className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                  <Input id="vehiclePlate" defaultValue={memberData.vehiclePlate} className="pl-10" />
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Services & Payment */}
+          {/* Membership Information */}
           <div className="space-y-6">
-            <h2 className="text-lg font-semibold">Services & Payment</h2>
-            <RadioGroup
-              value={selectedPlan}
-              onValueChange={setSelectedPlan}
-              className="grid grid-cols-1 md:grid-cols-3 gap-4"
-            >
-              {plans.map((plan) => (
+            <h2 className="text-lg font-semibold">Membership Information</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {membershipPlans.map((plan) => (
                 <div key={plan.id}>
-                  <RadioGroupItem value={plan.id} id={plan.id} className="peer sr-only" />
+                  <input
+                    type="radio"
+                    id={plan.id}
+                    name="membership"
+                    value={plan.id}
+                    checked={selectedMembership === plan.id}
+                    onChange={(e) => setSelectedMembership(e.target.value)}
+                    className="peer sr-only"
+                  />
                   <Label
                     htmlFor={plan.id}
                     className={cn(
-                      "flex flex-col p-4 border-2 border-gray-200 rounded-lg cursor-pointer transition-all",
-                      "peer-data-[state=checked]:border-purple-600 peer-data-[state=checked]:bg-purple-50",
+                      "flex flex-col p-4 border-2 border-gray-200 rounded-lg cursor-pointer transition-all hover:border-purple-300",
+                      "peer-checked:border-purple-600 peer-checked:bg-purple-50",
                     )}
                   >
                     <div className="flex justify-between items-start">
                       <div className="flex items-center gap-3">
                         <div className="bg-purple-100 p-2 rounded-full">{plan.icon}</div>
-                        <span className="font-semibold">{plan.name}</span>
+                        <div>
+                          <span className="font-semibold">{plan.name}</span>
+                          <p className="text-sm text-gray-500">{plan.brand}</p>
+                        </div>
                       </div>
-                      {selectedPlan === plan.id && <CheckCircle2 className="h-5 w-5 text-purple-600" />}
+                      {selectedMembership === plan.id && <CheckCircle2 className="h-5 w-5 text-purple-600" />}
                     </div>
                     <div className="mt-4">
-                      <span className="text-3xl font-bold">{plan.price}</span>
+                      <span className="text-2xl font-bold">{plan.price}</span>
                       <span className="text-gray-500"> per month</span>
                     </div>
                     <p className="text-sm text-gray-500 mt-2">{plan.description}</p>
                   </Label>
                 </div>
               ))}
-            </RadioGroup>
+            </div>
+          </div>
 
+          {/* Payment Information */}
+          <div className="space-y-4">
+            <h2 className="text-lg font-semibold">Payment Information</h2>
             <div className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <Label htmlFor="paymentMethod">Payment Method</Label>
-                  <div className="flex items-center gap-2">
-                    <div className="relative flex-grow">
-                      <CreditCard className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
-                      <Input id="paymentMethod" defaultValue={memberData.paymentMethod} className="pl-10" />
-                    </div>
-                    <Button className="bg-purple-600 hover:bg-purple-700 text-white">
-                      <Scan className="mr-2 h-4 w-4" />
-                      Update Card
-                    </Button>
+              <div>
+                <Label htmlFor="cardNumber">Card Number</Label>
+                <div className="flex items-center gap-2">
+                  <div className="relative flex-grow">
+                    <CreditCard className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                    <Input id="cardNumber" defaultValue={memberData.cardNumber} className="pl-10" />
                   </div>
+                  <Button 
+                    className="bg-purple-600 hover:bg-purple-700 text-white transition-all duration-200 hover:scale-105 active:scale-95"
+                    title="Scan credit card with camera"
+                  >
+                    <Scan className="mr-2 h-4 w-4" />
+                    Scan Card
+                  </Button>
                 </div>
+                <p className="text-xs text-gray-500 mt-1">Click to scan your credit card automatically</p>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-3 gap-4">
                 <div>
-                  <Label htmlFor="expDate">Expiration Date</Label>
-                  <Input id="expDate" defaultValue={memberData.expDate} />
+                  <Label htmlFor="expiryDate">Expiry MM/YY</Label>
+                  <Input id="expiryDate" defaultValue={memberData.expiryDate} />
                 </div>
                 <div>
-                  <Label htmlFor="cvc">CVC</Label>
-                  <div className="flex items-center gap-2">
-                    <Input id="cvc" defaultValue={memberData.cvc} />
-                    <HelpCircle className="h-5 w-5 text-gray-400" />
-                  </div>
+                  <Label htmlFor="cvv">CVV</Label>
+                  <Input id="cvv" defaultValue={memberData.cvv} />
+                </div>
+                <div>
+                  <Label htmlFor="zipCode">ZipCode</Label>
+                  <Input id="zipCode" defaultValue={memberData.zipCode} />
                 </div>
               </div>
             </div>
@@ -221,3 +276,9 @@ export default function CustomerDetailPage({ params }: { params: { id: string } 
     </div>
   )
 }
+
+
+
+
+
+
