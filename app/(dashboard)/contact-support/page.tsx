@@ -18,6 +18,20 @@ export default function ContactSupportPage() {
       </div>
       <div className="bg-white p-8 rounded-2xl shadow-sm">
         <form className="space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div>
+              <Label htmlFor="fullName">Full Name</Label>
+              <Input id="fullName" placeholder="Enter your full name" />
+            </div>
+            <div>
+              <Label htmlFor="email">Email Address</Label>
+              <Input id="email" type="email" placeholder="Enter your email address" />
+            </div>
+            <div>
+              <Label htmlFor="phone">Phone Number</Label>
+              <Input id="phone" type="tel" placeholder="Enter your phone number" />
+            </div>
+          </div>
           <div>
             <Label htmlFor="subject">Subject</Label>
             <Input id="subject" placeholder="Enter the subject of your ticket" />
