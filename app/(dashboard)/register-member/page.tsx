@@ -173,9 +173,9 @@ export default function RegisterCustomerPage() {
             </div>
           </div>
 
-          {/* Vehicle Information (optional) */}
+          {/* Vehicle Information */}
           <div className="space-y-4">
-            <h2 className="text-lg font-semibold">Vehicle (optional)</h2>
+            <h2 className="text-lg font-semibold">Vehicle Information</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div>
                 <Label htmlFor="vehicleMake">Make</Label>
@@ -220,10 +220,10 @@ export default function RegisterCustomerPage() {
                 <Input id="vehicleModel" placeholder="e.g., 2024 Corolla" />
               </div>
               <div>
-                <Label htmlFor="vehiclePlate">Vehicle Plate</Label>
+                <Label htmlFor="vehiclePlate">Vehicle Plate <span className="text-red-500">*</span></Label>
                 <div className="relative">
                   <Car className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
-                  <Input id="vehiclePlate" placeholder="e.g., ABC-1234" className="pl-10" />
+                  <Input id="vehiclePlate" placeholder="e.g., ABC-1234" className="pl-10" required />
                 </div>
               </div>
             </div>
@@ -361,14 +361,14 @@ export default function RegisterCustomerPage() {
 
           {/* Payment Information */}
           <div className="space-y-4">
-            <h2 className="text-lg font-semibold">Payment Information</h2>
+            <h2 className="text-lg font-semibold">Payment Information <span className="text-red-500">*</span></h2>
             <div className="space-y-4">
               <div>
-                <Label htmlFor="cardNumber">Card Number</Label>
+                <Label htmlFor="cardNumber">Card Number <span className="text-red-500">*</span></Label>
                 <div className="flex items-center gap-2">
                   <div className="relative flex-grow">
                     <CreditCard className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
-                    <Input id="cardNumber" placeholder="e.g., **** **** **** 1234" className="pl-10" />
+                    <Input id="cardNumber" placeholder="e.g., **** **** **** 1234" className="pl-10" required />
                   </div>
                   <Button 
                     className="bg-purple-600 hover:bg-purple-700 text-white transition-all duration-200 hover:scale-105 active:scale-95"
@@ -382,16 +382,16 @@ export default function RegisterCustomerPage() {
               </div>
               <div className="grid grid-cols-3 gap-4">
                 <div>
-                  <Label htmlFor="expiryDate">Expiry MM/YY</Label>
-                  <Input id="expiryDate" placeholder="MM/YY" />
+                  <Label htmlFor="expiryDate">Expiry MM/YY <span className="text-red-500">*</span></Label>
+                  <Input id="expiryDate" placeholder="MM/YY" required />
                 </div>
                 <div>
-                  <Label htmlFor="cvv">CVV</Label>
-                  <Input id="cvv" placeholder="CVV" />
+                  <Label htmlFor="cvv">CVV <span className="text-red-500">*</span></Label>
+                  <Input id="cvv" placeholder="CVV" required />
                 </div>
                 <div>
-                  <Label htmlFor="zipCode">ZipCode</Label>
-                  <Input id="zipCode" placeholder="ZipCode" />
+                  <Label htmlFor="zipCode">ZipCode <span className="text-red-500">*</span></Label>
+                  <Input id="zipCode" placeholder="ZipCode" required />
                 </div>
               </div>
             </div>
