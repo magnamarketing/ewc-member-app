@@ -107,17 +107,17 @@ export default function OverviewPage() {
                   <Input id="email" type="email" placeholder="Enter your email address" />
                 </div>
                 <div>
-                  <Label htmlFor="phone">Phone Number</Label>
-                  <Input id="phone" type="tel" placeholder="Enter your phone number" />
+                  <Label htmlFor="phone">Phone Number <span className="text-red-500">*</span></Label>
+                  <Input id="phone" type="tel" placeholder="Enter your phone number" required />
                 </div>
               </div>
               <div>
-                <Label htmlFor="subject">Subject</Label>
-                <Input id="subject" placeholder="e.g., Issue with customer account" />
+                <Label htmlFor="subject">Subject <span className="text-red-500">*</span></Label>
+                <Input id="subject" placeholder="e.g., Issue with customer account" required />
               </div>
               <div>
-                <Label htmlFor="message">Message</Label>
-                <Textarea id="message" placeholder="Please describe the issue in detail..." />
+                <Label htmlFor="message">Message <span className="text-red-500">*</span></Label>
+                <Textarea id="message" placeholder="Please describe the issue in detail..." required />
               </div>
             </form>
           </CardContent>
