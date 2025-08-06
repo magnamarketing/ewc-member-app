@@ -25,7 +25,13 @@ function Sidebar() {
     <aside className="w-72 flex-shrink-0 bg-sidebar-bg text-sidebar-text flex flex-col p-6 space-y-8">
       <div className="flex justify-center">
         <div className="bg-gradient-to-br from-white to-gray-100 p-4 rounded-xl shadow-sm">
-          <Image src="/logo.png" alt="Express Wash Concepts Logo" width={200} height={100} />
+          <Image 
+            src="/logo.png" 
+            alt="Express Wash Concepts Logo" 
+            width={200} 
+            height={100} 
+            className="object-contain"
+          />
         </div>
       </div>
 
