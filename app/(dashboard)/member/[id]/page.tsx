@@ -88,12 +88,12 @@ export default function CustomerDetailPage({ params }: { params: { id: string } 
             <h2 className="text-lg font-semibold">Customer Information</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <Label htmlFor="firstName">First Name</Label>
-                <Input id="firstName" defaultValue={memberData.firstName} />
+                <Label htmlFor="firstName">First Name <span className="text-red-500">*</span></Label>
+                <Input id="firstName" defaultValue={memberData.firstName} required />
               </div>
               <div>
-                <Label htmlFor="lastName">Last Name</Label>
-                <Input id="lastName" defaultValue={memberData.lastName} />
+                <Label htmlFor="lastName">Last Name <span className="text-red-500">*</span></Label>
+                <Input id="lastName" defaultValue={memberData.lastName} required />
               </div>
               <div className="relative">
                 <Label htmlFor="email">Email Address</Label>
@@ -101,15 +101,15 @@ export default function CustomerDetailPage({ params }: { params: { id: string } 
                 <Input id="email" type="email" defaultValue={memberData.email} className="pl-10" />
               </div>
               <div>
-                <Label htmlFor="phone">Phone Number</Label>
-                <Input id="phone" type="tel" defaultValue={memberData.phone} />
+                <Label htmlFor="phone">Phone Number <span className="text-red-500">*</span></Label>
+                <Input id="phone" type="tel" defaultValue={memberData.phone} required />
               </div>
               <div className="md:col-span-2">
-                <Label htmlFor="barcode">Barcode</Label>
+                <Label htmlFor="barcode">Barcode <span className="text-red-500">*</span></Label>
                 <div className="flex items-center gap-2">
                   <div className="relative flex-grow">
                     <Scan className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
-                    <Input id="barcode" defaultValue={memberData.barcode} className="pl-10 font-mono" />
+                    <Input id="barcode" defaultValue={memberData.barcode} className="pl-10 font-mono" required />
                   </div>
                   <Button 
                     className="bg-purple-600 hover:bg-purple-700 text-white transition-all duration-200 hover:scale-105 active:scale-95"
@@ -124,9 +124,9 @@ export default function CustomerDetailPage({ params }: { params: { id: string } 
             </div>
           </div>
 
-          {/* Vehicle Information (optional) */}
+          {/* Vehicle Information */}
           <div className="space-y-4">
-            <h2 className="text-lg font-semibold">Vehicle (optional)</h2>
+            <h2 className="text-lg font-semibold">Vehicle Information</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div>
                 <Label htmlFor="vehicleMake">Make</Label>
@@ -171,10 +171,10 @@ export default function CustomerDetailPage({ params }: { params: { id: string } 
                 <Input id="vehicleModel" defaultValue={memberData.vehicleModel} />
               </div>
               <div>
-                <Label htmlFor="vehiclePlate">Vehicle Plate</Label>
+                <Label htmlFor="vehiclePlate">Vehicle Plate <span className="text-red-500">*</span></Label>
                 <div className="relative">
                   <Car className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
-                  <Input id="vehiclePlate" defaultValue={memberData.vehiclePlate} className="pl-10" />
+                  <Input id="vehiclePlate" defaultValue={memberData.vehiclePlate} className="pl-10" required />
                 </div>
               </div>
             </div>
@@ -225,14 +225,14 @@ export default function CustomerDetailPage({ params }: { params: { id: string } 
 
           {/* Payment Information */}
           <div className="space-y-4">
-            <h2 className="text-lg font-semibold">Payment Information</h2>
+            <h2 className="text-lg font-semibold">Payment Information <span className="text-red-500">*</span></h2>
             <div className="space-y-4">
               <div>
-                <Label htmlFor="cardNumber">Card Number</Label>
+                <Label htmlFor="cardNumber">Card Number <span className="text-red-500">*</span></Label>
                 <div className="flex items-center gap-2">
                   <div className="relative flex-grow">
                     <CreditCard className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
-                    <Input id="cardNumber" defaultValue={memberData.cardNumber} className="pl-10" />
+                    <Input id="cardNumber" defaultValue={memberData.cardNumber} className="pl-10" required />
                   </div>
                   <Button 
                     className="bg-purple-600 hover:bg-purple-700 text-white transition-all duration-200 hover:scale-105 active:scale-95"
@@ -246,16 +246,16 @@ export default function CustomerDetailPage({ params }: { params: { id: string } 
               </div>
               <div className="grid grid-cols-3 gap-4">
                 <div>
-                  <Label htmlFor="expiryDate">Expiry MM/YY</Label>
-                  <Input id="expiryDate" defaultValue={memberData.expiryDate} />
+                  <Label htmlFor="expiryDate">Expiry MM/YY <span className="text-red-500">*</span></Label>
+                  <Input id="expiryDate" defaultValue={memberData.expiryDate} required />
                 </div>
                 <div>
-                  <Label htmlFor="cvv">CVV</Label>
-                  <Input id="cvv" defaultValue={memberData.cvv} />
+                  <Label htmlFor="cvv">CVV <span className="text-red-500">*</span></Label>
+                  <Input id="cvv" defaultValue={memberData.cvv} required />
                 </div>
                 <div>
-                  <Label htmlFor="zipCode">ZipCode</Label>
-                  <Input id="zipCode" defaultValue={memberData.zipCode} />
+                  <Label htmlFor="zipCode">ZipCode <span className="text-red-500">*</span></Label>
+                  <Input id="zipCode" defaultValue={memberData.zipCode} required />
                 </div>
               </div>
             </div>
@@ -276,3 +276,9 @@ export default function CustomerDetailPage({ params }: { params: { id: string } 
     </div>
   )
 }
+
+
+
+
+
+
