@@ -4,7 +4,7 @@ import type React from "react"
 
 import Image from "next/image"
 import Link from "next/link"
-import { Home, Search, UserPlus, HelpCircle, Headphones, Shield, Info, LogOut } from "lucide-react"
+import { Home, Search, UserPlus, HelpCircle, Headphones, Shield, Info, LogOut, BookOpen } from "lucide-react"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
@@ -14,16 +14,17 @@ function Sidebar() {
 
   const navLinks = [
     { href: "/", icon: <Home className="w-6 h-6" />, label: "Overview" },
-    { href: "/member-search", icon: <Search className="w-6 h-6" />, label: "Member Search" },
+    { href: "/wash-packages", icon: <BookOpen className="w-6 h-6" />, label: "Wash Packages" },
     { href: "/register-member", icon: <UserPlus className="w-6 h-6" />, label: "Member Registration" },
-    { href: "/faqs", icon: <HelpCircle className="w-6 h-6" />, label: "FAQs" },
+    { href: "/member-search", icon: <Search className="w-6 h-6" />, label: "Member Search" },
+    { href: "/faqs", icon: <HelpCircle className="w-6 h-6" />, label: "FAQ" },
     { href: "/contact-support", icon: <Headphones className="w-6 h-6" />, label: "Contact Support" },
   ]
 
   return (
     <aside className="w-72 flex-shrink-0 bg-sidebar-bg text-sidebar-text flex flex-col p-6 space-y-8">
       <div className="flex justify-center">
-        <Image src="/logo.png" alt="Moo Moo Express Car Wash Logo" width={200} height={100} />
+        <Image src="/logo.png" alt="Express Wash Concepts Logo" width={200} height={100} />
       </div>
 
       <nav className="flex-grow">
