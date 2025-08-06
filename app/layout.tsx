@@ -8,9 +8,9 @@ export const metadata: Metadata = {
   description: 'Express Wash Concepts Member Application',
   generator: 'v0.dev',
   icons: {
-    icon: '/logo.png',
-    shortcut: '/logo.png',
-    apple: '/logo.png',
+    icon: '/favicon.jpg',
+    shortcut: '/favicon.jpg',
+    apple: '/favicon.jpg',
   },
 }
 
