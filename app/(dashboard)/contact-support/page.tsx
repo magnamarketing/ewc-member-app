@@ -28,17 +28,17 @@ export default function ContactSupportPage() {
               <Input id="email" type="email" placeholder="Enter your email address" />
             </div>
             <div>
-              <Label htmlFor="phone">Phone Number</Label>
-              <Input id="phone" type="tel" placeholder="Enter your phone number" />
+              <Label htmlFor="phone">Phone Number <span className="text-red-500">*</span></Label>
+              <Input id="phone" type="tel" placeholder="Enter your phone number" required />
             </div>
           </div>
           <div>
-            <Label htmlFor="subject">Subject</Label>
-            <Input id="subject" placeholder="Enter the subject of your ticket" />
+            <Label htmlFor="subject">Subject <span className="text-red-500">*</span></Label>
+            <Input id="subject" placeholder="Enter the subject of your ticket" required />
           </div>
           <div>
-            <Label htmlFor="description">Description</Label>
-            <Textarea id="description" placeholder="Please describe your issue in detail..." rows={8} />
+            <Label htmlFor="description">Description <span className="text-red-500">*</span></Label>
+            <Textarea id="description" placeholder="Please describe your issue in detail..." rows={8} required />
           </div>
           <div className="flex justify-end">
             <Button type="submit" className="bg-purple-600 hover:bg-purple-700 text-white">
